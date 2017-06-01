@@ -1,5 +1,93 @@
 mov B, #03h ; id for Player 1, Player 2 would be 4
+JMP DISPLAY
+RESET:
+mov 0x00, #00h
+mov 0x01, #00h
+mov 0x02, #00h
+mov 0x08, #00h
+mov 0x09, #00h
+mov 0x0A, #00h
+mov 0x10, #00h
+mov 0x11, #00h
+mov 0x12, #00h
+mov B, #03h
+JMP DISPLAY
+
+PLAYER1:
+CLR P2.3
+JNB P3.3, RESET
+JMP PLAYER1
+
+PLAYER2:
+CLR P2.3
+JNB P3.3, RESET
+JMP PLAYER2
+
 DISPLAY:
+mov A,	0x00
+ADD A,	0x01
+ADD A, 	0x02
+SUBB A,	#09h
+JZ PLAYER1
+SUBB A, #03h
+JZ PLAYER2
+
+mov A,	0x08
+ADD A,	0x09
+ADD A, 	0x0A
+SUBB A,	#09h
+JZ PLAYER1
+SUBB A, #03h
+JZ PLAYER2
+
+mov A,	0x10
+ADD A,	0x11
+ADD A, 	0x12
+SUBB A,	#09h
+JZ PLAYER1
+SUBB A, #03h
+JZ PLAYER2
+
+mov A,	0x00
+ADD A,	0x08
+ADD A, 	0x10
+SUBB A,	#09h
+JZ PLAYER1
+SUBB A, #03h
+JZ PLAYER2
+
+mov A,	0x01
+ADD A,	0x09
+ADD A, 	0x11
+SUBB A,	#09h
+JZ PLAYER1
+SUBB A, #03h
+JZ PLAYER2
+
+mov A,	0x02
+ADD A,	0x0A
+ADD A, 	0x12
+SUBB A,	#09h
+JZ PLAYER1
+SUBB A, #03h
+JZ PLAYER2
+
+mov A,	0x00
+ADD A,	0x09
+ADD A, 	0x12
+SUBB A,	#09h
+JZ PLAYER1
+SUBB A, #03h
+JZ PLAYER2
+
+mov A,	0x02
+ADD A,	0x09
+ADD A, 	0x10
+SUBB A,	#09h
+JZ PLAYER1
+SUBB A, #03h
+JZ PLAYER2
+
 mov P0, #11011011b ;set column 2 and 5 to 0
 mov P1, #00h ; set all rows to 0 -> now column 2 and 5 light up
 mov P1, #11011011b ; set row C and F to 0
