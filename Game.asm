@@ -1,4 +1,4 @@
-
+mov B, #03h ; id for Player 1, Player 2 would be 4
 DISPLAY:
 mov P0, #11011011b ;set column 2 and 5 to 0
 mov P1, #00h ; set all rows to 0 -> now column 2 and 5 light up
@@ -27,25 +27,89 @@ jnb P3.1,EIGHT ; check 1
 jnb P3.2,NINE; check 2
 mov P2, #0FFh ; set all rows to 1
 
-mov A, P2
-mov B, P3
+jmp DISPLAY
+
+BACK: ;because a jump to display is too long...
 jmp DISPLAY
 
 ONE:
-JMP DISPLAY
+MOV A, 0x00 ;get actual stored value
+JNZ BACK ; if value != 0 jump
+mov 0x00,B ; store B (Player value)
+;change player value with xor
+mov A,#07h ; load 7 to acc
+xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
+mov B,A ; store new player value in B
+JMP BACK ; jump 
 TWO:
-JMP DISPLAY
+MOV A, 0x01 ;get actual stored value
+JNZ BACK ; if value != 0 jump
+mov 0x01,B ; store B (Player value)
+;change player value with xor
+mov A,#07h ; load 7 to acc
+xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
+mov B,A ; store new player value in B
+JMP BACK ; jump 
 THREE:
-JMP DISPLAY
+MOV A, 0x02 ;get actual stored value
+JNZ BACK ; if value != 0 jump
+mov 0x02,B ; store B (Player value)
+;change player value with xor
+mov A,#07h ; load 7 to acc
+xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
+mov B,A ; store new player value in B
+JMP BACK ; jump 
 FOUR:
-JMP DISPLAY
+MOV A, 0x08 ;get actual stored value
+JNZ BACK ; if value != 0 jump
+mov 0x08,B ; store B (Player value)
+;change player value with xor
+mov A,#07h ; load 7 to acc
+xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
+mov B,A ; store new player value in B
+JMP BACK ; jump 
 FIVE:
-JMP DISPLAY
+MOV A, 0x09 ;get actual stored value
+JNZ BACK ; if value != 0 jump
+mov 0x09,B ; store B (Player value)
+;change player value with xor
+mov A,#07h ; load 7 to acc
+xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
+mov B,A ; store new player value in B
+JMP BACK ; jump 
 SIX:
-JMP DISPLAY
+MOV A, 0x0A ;get actual stored value
+JNZ BACK ; if value != 0 jump
+mov 0x0A,B ; store B (Player value)
+;change player value with xor
+mov A,#07h ; load 7 to acc
+xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
+mov B,A ; store new player value in B
+JMP BACK ; jump 
 SEVEN:
-JMP DISPLAY
+MOV A, 0x10 ;get actual stored value
+JNZ BACK ; if value != 0 jump
+mov 0x10,B ; store B (Player value)
+;change player value with xor
+mov A,#07h ; load 7 to acc
+xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
+mov B,A ; store new player value in B
+JMP BACK ; jump 
 EIGHT:
-JMP DISPLAY
+MOV A, 0x11 ;get actual stored value
+JNZ BACK ; if value != 0 jump
+mov 0x11,B ; store B (Player value)
+;change player value with xor
+mov A,#07h ; load 7 to acc
+xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
+mov B,A ; store new player value in B
+JMP BACK ; jump 
 NINE:
-JMP DISPLAY
+MOV A, 0x12 ;get actual stored value
+JNZ BACK ; if value != 0 jump
+mov 0x12,B ; store B (Player value)
+;change player value with xor
+mov A,#07h ; load 7 to acc
+xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
+mov B,A ; store new player value in B
+JMP BACK ; jump 
