@@ -1,6 +1,7 @@
 mov B, #03h ; id for Player 1, Player 2 would be 4
 JMP DISPLAY
-RESET:
+
+RESET: ; reset storage for selected fields
 mov 0x00, #00h
 mov 0x01, #00h
 mov 0x02, #00h
@@ -13,17 +14,19 @@ mov 0x12, #00h
 mov B, #03h
 JMP DISPLAY
 
-PLAYER1:
+PLAYER1: ; Player 1 wins, stay in this loop until "reset" is klicked
 CLR P2.3
 JNB P3.3, RESET
 JMP PLAYER1
 
-PLAYER2:
+PLAYER2: ; Player 2 wins, stay in this loop until "reset" is klicked
 CLR P2.3
 JNB P3.3, RESET
 JMP PLAYER2
 
 DISPLAY:
+CALL SHOW
+; check first row
 mov A,	0x00
 ADD A,	0x01
 ADD A, 	0x02
@@ -32,6 +35,7 @@ JZ PLAYER1
 SUBB A, #03h
 JZ PLAYER2
 
+; check second row
 mov A,	0x08
 ADD A,	0x09
 ADD A, 	0x0A
@@ -40,6 +44,7 @@ JZ PLAYER1
 SUBB A, #03h
 JZ PLAYER2
 
+; check third row
 mov A,	0x10
 ADD A,	0x11
 ADD A, 	0x12
@@ -48,6 +53,7 @@ JZ PLAYER1
 SUBB A, #03h
 JZ PLAYER2
 
+; check first column
 mov A,	0x00
 ADD A,	0x08
 ADD A, 	0x10
@@ -56,6 +62,7 @@ JZ PLAYER1
 SUBB A, #03h
 JZ PLAYER2
 
+; check second column
 mov A,	0x01
 ADD A,	0x09
 ADD A, 	0x11
@@ -64,6 +71,7 @@ JZ PLAYER1
 SUBB A, #03h
 JZ PLAYER2
 
+; check third column
 mov A,	0x02
 ADD A,	0x0A
 ADD A, 	0x12
@@ -72,6 +80,7 @@ JZ PLAYER1
 SUBB A, #03h
 JZ PLAYER2
 
+; check left-to-right diagonal
 mov A,	0x00
 ADD A,	0x09
 ADD A, 	0x12
@@ -80,6 +89,7 @@ JZ PLAYER1
 SUBB A, #03h
 JZ PLAYER2
 
+; check right-to-left diagonal
 mov A,	0x02
 ADD A,	0x09
 ADD A, 	0x10
@@ -200,4 +210,16 @@ mov 0x12,B ; store B (Player value)
 mov A,#07h ; load 7 to acc
 xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
 mov B,A ; store new player value in B
-JMP BACK ; jump 
+JMP BACK ; jump
+
+SHOW:
+mov A, 0x00
+SUBB A, #03h
+JNZ $+8
+mov P0, #00111111b
+mov P1, #01111111b
+SUBB A, #01h
+JNZ $+8
+mov P0, #01111111b
+mov P1, #00111111b
+RET
