@@ -2,15 +2,15 @@ mov B, #03h ; id for Player 1, Player 2 would be 4
 JMP DISPLAY
 
 RESET: ; reset storage for selected fields
-mov 0x00, #00h
-mov 0x01, #00h
-mov 0x02, #00h
-mov 0x08, #00h
-mov 0x09, #00h
-mov 0x0A, #00h
-mov 0x10, #00h
-mov 0x11, #00h
-mov 0x12, #00h
+mov 0x18, #00h
+mov 0x19, #00h
+mov 0x1A, #00h
+mov 0x20, #00h
+mov 0x21, #00h
+mov 0x22, #00h
+mov 0x28, #00h
+mov 0x29, #00h
+mov 0x2A, #00h
 mov B, #03h
 JMP DISPLAY
 
@@ -27,72 +27,72 @@ JMP PLAYER2
 DISPLAY:
 CALL SHOW
 ; check first row
-mov A,	0x00
-ADD A,	0x01
-ADD A, 	0x02
+mov A,	0x18
+ADD A,	0x19
+ADD A, 	0x1A
 SUBB A,	#09h
 JZ PLAYER1
 SUBB A, #03h
 JZ PLAYER2
 
 ; check second row
-mov A,	0x08
-ADD A,	0x09
-ADD A, 	0x0A
+mov A,	0x20
+ADD A,	0x21
+ADD A, 	0x22
 SUBB A,	#09h
 JZ PLAYER1
 SUBB A, #03h
 JZ PLAYER2
 
 ; check third row
-mov A,	0x10
-ADD A,	0x11
-ADD A, 	0x12
+mov A,	0x28
+ADD A,	0x29
+ADD A, 	0x2A
 SUBB A,	#09h
 JZ PLAYER1
 SUBB A, #03h
 JZ PLAYER2
 
 ; check first column
-mov A,	0x00
-ADD A,	0x08
-ADD A, 	0x10
+mov A,	0x18
+ADD A,	0x20
+ADD A, 	0x28
 SUBB A,	#09h
 JZ PLAYER1
 SUBB A, #03h
 JZ PLAYER2
 
 ; check second column
-mov A,	0x01
-ADD A,	0x09
-ADD A, 	0x11
+mov A,	0x19
+ADD A,	0x21
+ADD A, 	0x29
 SUBB A,	#09h
 JZ PLAYER1
 SUBB A, #03h
 JZ PLAYER2
 
 ; check third column
-mov A,	0x02
-ADD A,	0x0A
-ADD A, 	0x12
+mov A,	0x1A
+ADD A,	0x22
+ADD A, 	0x2A
 SUBB A,	#09h
 JZ PLAYER1
 SUBB A, #03h
 JZ PLAYER2
 
 ; check left-to-right diagonal
-mov A,	0x00
-ADD A,	0x09
-ADD A, 	0x12
+mov A,	0x18
+ADD A,	0x21
+ADD A, 	0x2A
 SUBB A,	#09h
 JZ PLAYER1
 SUBB A, #03h
 JZ PLAYER2
 
 ; check right-to-left diagonal
-mov A,	0x02
-ADD A,	0x09
-ADD A, 	0x10
+mov A,	0x1A
+ADD A,	0x21
+ADD A, 	0x28
 SUBB A,	#09h
 JZ PLAYER1
 SUBB A, #03h
@@ -131,81 +131,81 @@ BACK: ;because a jump to display is too long...
 jmp DISPLAY
 
 ONE:
-MOV A, 0x00 ;get actual stored value
+MOV A, 0x18 ;get actual stored value
 JNZ BACK ; if value != 0 jump
-mov 0x00,B ; store B (Player value)
+mov 0x18,B ; store B (Player value)
 ;change player value with xor
 mov A,#07h ; load 7 to acc
 xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
 mov B,A ; store new player value in B
 JMP BACK ; jump 
 TWO:
-MOV A, 0x01 ;get actual stored value
+MOV A, 0x19 ;get actual stored value
 JNZ BACK ; if value != 0 jump
-mov 0x01,B ; store B (Player value)
+mov 0x19,B ; store B (Player value)
 ;change player value with xor
 mov A,#07h ; load 7 to acc
 xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
 mov B,A ; store new player value in B
 JMP BACK ; jump 
 THREE:
-MOV A, 0x02 ;get actual stored value
+MOV A, 0x1A ;get actual stored value
 JNZ BACK ; if value != 0 jump
-mov 0x02,B ; store B (Player value)
+mov 0x1A,B ; store B (Player value)
 ;change player value with xor
 mov A,#07h ; load 7 to acc
 xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
 mov B,A ; store new player value in B
 JMP BACK ; jump 
 FOUR:
-MOV A, 0x08 ;get actual stored value
+MOV A, 0x20 ;get actual stored value
 JNZ BACK ; if value != 0 jump
-mov 0x08,B ; store B (Player value)
+mov 0x20,B ; store B (Player value)
 ;change player value with xor
 mov A,#07h ; load 7 to acc
 xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
 mov B,A ; store new player value in B
 JMP BACK ; jump 
 FIVE:
-MOV A, 0x09 ;get actual stored value
+MOV A, 0x21 ;get actual stored value
 JNZ BACK ; if value != 0 jump
-mov 0x09,B ; store B (Player value)
+mov 0x21,B ; store B (Player value)
 ;change player value with xor
 mov A,#07h ; load 7 to acc
 xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
 mov B,A ; store new player value in B
 JMP BACK ; jump 
 SIX:
-MOV A, 0x0A ;get actual stored value
+MOV A, 0x22 ;get actual stored value
 JNZ BACK ; if value != 0 jump
-mov 0x0A,B ; store B (Player value)
+mov 0x22,B ; store B (Player value)
 ;change player value with xor
 mov A,#07h ; load 7 to acc
 xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
 mov B,A ; store new player value in B
 JMP BACK ; jump 
 SEVEN:
-MOV A, 0x10 ;get actual stored value
+MOV A, 0x28 ;get actual stored value
 JNZ BACK ; if value != 0 jump
-mov 0x10,B ; store B (Player value)
+mov 0x28,B ; store B (Player value)
 ;change player value with xor
 mov A,#07h ; load 7 to acc
 xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
 mov B,A ; store new player value in B
 JMP BACK ; jump 
 EIGHT:
-MOV A, 0x11 ;get actual stored value
+MOV A, 0x29 ;get actual stored value
 JNZ BACK ; if value != 0 jump
-mov 0x11,B ; store B (Player value)
+mov 0x29,B ; store B (Player value)
 ;change player value with xor
 mov A,#07h ; load 7 to acc
 xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
 mov B,A ; store new player value in B
 JMP BACK ; jump 
 NINE:
-MOV A, 0x12 ;get actual stored value
+MOV A, 0x2A ;get actual stored value
 JNZ BACK ; if value != 0 jump
-mov 0x12,B ; store B (Player value)
+mov 0x2A,B ; store B (Player value)
 ;change player value with xor
 mov A,#07h ; load 7 to acc
 xrl A,B ; xor A B -> 7 xor 3 = 4, 7 xor 4 = 3
@@ -213,13 +213,132 @@ mov B,A ; store new player value in B
 JMP BACK ; jump
 
 SHOW:
-mov A, 0x00
+;check if storage is selected and display player icon
+mov A, 0x18	
 SUBB A, #03h
-JNZ $+8
-mov P0, #00111111b
+JNZ $+10		;if !=0 jump over next 3 lines
+mov P0, #00111111b	;else display player1 icon
 mov P1, #01111111b
+jmp $+12		; jump over next 4 lines
+SUBB A, #01h
+JNZ $+8			;if != 0 jump over next 2 lines
+mov P0, #01111111b	; else display player2 icon
+mov P1, #00111111b
+;reset view
+mov P0, #0FFh
+mov P1, #0FFh
+
+;next 8 blocks have the same logic just for the other parts of the storage
+mov A, 0x19
+SUBB A, #03h
+JNZ $+10
+mov P0, #11100111b
+mov P1, #01111111b
+jmp $+12
+SUBB A, #01h
+JNZ $+8
+mov P0, #11101111b
+mov P1, #00111111b
+;reset view
+mov P0, #0FFh
+mov P1, #0FFh
+
+mov A, 0x1A
+SUBB A, #03h
+JNZ $+10
+mov P0, #11111100b
+mov P1, #01111111b
+jmp $+12
+SUBB A, #01h
+JNZ $+8
+mov P0, #11111101b
+mov P1, #00111111b
+;reset view
+mov P0, #0FFh
+mov P1, #0FFh
+
+mov A, 0x20
+SUBB A, #03h
+JNZ $+10
+mov P0, #00111111b
+mov P1, #11101111b
+jmp $+12
 SUBB A, #01h
 JNZ $+8
 mov P0, #01111111b
-mov P1, #00111111b
+mov P1, #11100111b
+;reset view
+mov P0, #0FFh
+mov P1, #0FFh
+
+mov A, 0x21
+SUBB A, #03h
+JNZ $+10
+mov P0, #11100111b
+mov P1, #11101111b
+jmp $+12
+SUBB A, #01h
+JNZ $+8
+mov P0, #11101111b
+mov P1, #11100111b
+;reset view
+mov P0, #0FFh
+mov P1, #0FFh
+
+mov A, 0x22
+SUBB A, #03h
+JNZ $+10
+mov P0, #11111100b
+mov P1, #11101111b
+jmp $+12
+SUBB A, #01h
+JNZ $+8
+mov P0, #11111101b
+mov P1, #11100111b
+;reset view
+mov P0, #0FFh
+mov P1, #0FFh
+
+mov A, 0x28
+SUBB A, #03h
+JNZ $+10
+mov P0, #00111111b
+mov P1, #11111101b
+jmp $+12
+SUBB A, #01h
+JNZ $+8
+mov P0, #01111111b
+mov P1, #11111100b
+;reset view
+mov P0, #0FFh
+mov P1, #0FFh
+
+mov A, 0x29
+SUBB A, #03h
+JNZ $+10
+mov P0, #11100111b
+mov P1, #11111101b
+jmp $+12
+SUBB A, #01h
+JNZ $+8
+mov P0, #11101111b
+mov P1, #11111100b
+;reset view
+mov P0, #0FFh
+mov P1, #0FFh
+
+mov A, 0x2A
+SUBB A, #03h
+JNZ $+10
+mov P0, #11111100b
+mov P1, #11111101b
+jmp $+12
+SUBB A, #01h
+JNZ $+8
+mov P0, #11111101b
+mov P1, #11111100b
+;reset view
+mov P0, #0FFh
+mov P1, #0FFh
+
 RET
